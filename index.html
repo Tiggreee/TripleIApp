@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TriIA — Arena de modelos de IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ───────────────── NAV ───────────────── -->
+  <header class="nav">
+    <a href="#" class="nav__logo">Tri<span>IA</span></a>
+
+    <nav class="nav__links">
+      <a href="#arena">Arena</a>
+      <a href="#stats">Estadísticas</a>
+      <a href="#models">Modelos</a>
+      <a href="#about">Acerca de</a>
+    </nav>
+
+    <div class="nav__actions">
+      <span class="status-dot"></span>
+      <span class="status-label">3 modelos activos</span>
+    </div>
+  </header>
+
+  <!-- ───────────────── HERO ───────────────── -->
+  <section class="hero">
+    <p class="hero__tag">Benchmark en tiempo real</p>
+    <h1 class="hero__title">
+      Compara tres IAs.<br />
+      <span>Decide cuál confiar.</span>
+    </h1>
+    <p class="hero__sub">
+      Envía el mismo prompt a GPT-4o mini, Gemini 1.5 Flash y Llama 3
+      simultáneamente. Evalúa velocidad, profundidad y veracidad.
+    </p>
+    <a href="#arena" class="btn btn--primary">Comenzar ahora</a>
+  </section>
+
+  <!-- ───────────────── MARQUEE ───────────────── -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>GPT-4o&nbsp;mini</span><span class="sep">·</span>
+      <span>Gemini&nbsp;1.5&nbsp;Flash</span><span class="sep">·</span>
+      <span>Llama&nbsp;3&nbsp;(Groq)</span><span class="sep">·</span>
+      <span>Credibilidad</span><span class="sep">·</span>
+      <span>Latencia</span><span class="sep">·</span>
+      <span>Precisión</span><span class="sep">·</span>
+      <span>Contexto</span><span class="sep">·</span>
+      <span>GPT-4o&nbsp;mini</span><span class="sep">·</span>
+      <span>Gemini&nbsp;1.5&nbsp;Flash</span><span class="sep">·</span>
+      <span>Llama&nbsp;3&nbsp;(Groq)</span><span class="sep">·</span>
+      <span>Credibilidad</span><span class="sep">·</span>
+      <span>Latencia</span><span class="sep">·</span>
+      <span>Precisión</span><span class="sep">·</span>
+      <span>Contexto</span><span class="sep">·</span>
+    </div>
+  </div>
+
+  <!-- ───────────────── MODEL SELECTOR ───────────────── -->
+  <section id="models" class="section section--narrow">
+    <p class="section__overline">Configuración</p>
+    <h2 class="section__title">Selección de modelos</h2>
+    <p class="section__desc">
+      Todos los modelos tienen capa gratuita de API. Los 3 que actives
+      aparecerán en la arena de comparación.
+    </p>
+
+    <div class="model-grid">
+
+      <!-- 1 · GPT-4o mini -->
+      <div class="model-card model-card--openai active" data-model="openai">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--openai">OpenAI</span>
+          <label class="toggle">
+            <input type="checkbox" checked id="toggle-openai" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">GPT-4o mini</h3>
+        <p class="model-card__desc">
+          Modelo ligero y rápido de OpenAI. Free tier con límite de tokens por minuto.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free tier</li>
+          <li>128k ctx</li>
+          <li>Multimodal</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 2 · Gemini 1.5 Flash -->
+      <div class="model-card model-card--gemini active" data-model="gemini">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--gemini">Google</span>
+          <label class="toggle">
+            <input type="checkbox" checked id="toggle-gemini" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">Gemini 1.5 Flash</h3>
+        <p class="model-card__desc">
+          Google AI Studio con cuota gratuita diaria generosa. Ideal para contextos largos.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free tier</li>
+          <li>1M ctx</li>
+          <li>Vision</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 3 · Llama 3 via Groq -->
+      <div class="model-card model-card--groq active" data-model="groq">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--groq">Groq</span>
+          <label class="toggle">
+            <input type="checkbox" checked id="toggle-groq" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">Llama 3 · 70B</h3>
+        <p class="model-card__desc">
+          Meta Llama 3 en hardware LPU de Groq. La inferencia más rápida del mercado, gratis.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free tier</li>
+          <li>8k ctx</li>
+          <li>Open source</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 4 · Mistral 7B -->
+      <div class="model-card model-card--mistral" data-model="mistral">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--mistral">Mistral</span>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-mistral" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">Mistral 7B</h3>
+        <p class="model-card__desc">
+          Modelo denso eficiente de Mistral AI. Free tier vía La Plateforme con buena velocidad.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free tier</li>
+          <li>32k ctx</li>
+          <li>Eficiente</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 5 · Claude 3 Haiku -->
+      <div class="model-card model-card--anthropic" data-model="anthropic">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--anthropic">Anthropic</span>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-anthropic" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">Claude 3 Haiku</h3>
+        <p class="model-card__desc">
+          El modelo más rápido de Anthropic. Capa gratuita disponible vía API con créditos iniciales.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free credits</li>
+          <li>200k ctx</li>
+          <li>Seguro</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 6 · DeepSeek V3 -->
+      <div class="model-card model-card--deepseek" data-model="deepseek">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--deepseek">DeepSeek</span>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-deepseek" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">DeepSeek V3</h3>
+        <p class="model-card__desc">
+          Modelo chino open-source de altas capacidades. Free tier generoso en la API oficial.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free tier</li>
+          <li>64k ctx</li>
+          <li>Open source</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 7 · Command R (Cohere) -->
+      <div class="model-card model-card--cohere" data-model="cohere">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--cohere">Cohere</span>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-cohere" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">Command R</h3>
+        <p class="model-card__desc">
+          Especializado en RAG y tareas empresariales. Free tier disponible para desarrollo.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free tier</li>
+          <li>128k ctx</li>
+          <li>RAG</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 8 · Mixtral 8x7B (HuggingFace) -->
+      <div class="model-card model-card--hf" data-model="hf">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--hf">HuggingFace</span>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-hf" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">Mixtral 8x7B</h3>
+        <p class="model-card__desc">
+          Mezcla de expertos de Mistral ejecutado en la Inference API gratuita de Hugging Face.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free tier</li>
+          <li>32k ctx</li>
+          <li>MoE</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+      <!-- 9 · Llama 3 8B (Together AI) -->
+      <div class="model-card model-card--together" data-model="together">
+        <div class="model-card__header">
+          <span class="model-badge model-badge--together">Together AI</span>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-together" />
+            <span class="toggle__track"></span>
+          </label>
+        </div>
+        <h3 class="model-card__name">Llama 3 · 8B</h3>
+        <p class="model-card__desc">
+          Versión pequeña y ágil de Llama 3 vía Together AI. Créditos gratuitos al registrarse.
+        </p>
+        <ul class="model-card__tags">
+          <li>Free credits</li>
+          <li>8k ctx</li>
+          <li>Open source</li>
+        </ul>
+        <div class="model-card__footer">
+          <span class="dot dot--green"></span> Disponible
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ───────────────── ARENA ───────────────── -->
+  <section id="arena" class="section section--arena">
+    <p class="section__overline">Promptera</p>
+    <h2 class="section__title">Arena de comparación</h2>
+    <p class="section__desc">
+      Escribe tu prompt y los tres modelos responderán en paralelo.
+    </p>
+
+    <!-- Prompt input -->
+    <div class="prompt-box">
+      <textarea
+        id="prompt-input"
+        class="prompt-box__textarea"
+        rows="3"
+        placeholder="Escribe tu prompt aquí… ej. «Explica la relatividad general en tres párrafos»"
+      ></textarea>
+      <div class="prompt-box__footer">
+        <div class="prompt-box__options">
+          <label class="chip-check">
+            <input type="checkbox" checked /> Temperatura 0.7
+          </label>
+          <label class="chip-check">
+            <input type="checkbox" /> Modo creativo
+          </label>
+          <label class="chip-check">
+            <input type="checkbox" /> Solo hechos
+          </label>
+        </div>
+        <button id="send-btn" class="btn btn--primary btn--send">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar a las 3 IAs
+        </button>
+      </div>
+    </div>
+
+    <!-- Response panels -->
+    <div class="arena-grid" id="arena-grid">
+
+      <!-- OpenAI -->
+      <div class="arena-panel" id="panel-openai">
+        <div class="arena-panel__header">
+          <div class="arena-panel__meta">
+            <span class="model-badge model-badge--openai">OpenAI</span>
+            <span class="arena-panel__model">GPT-4o mini</span>
+          </div>
+          <div class="arena-panel__metrics" id="metrics-openai">
+            <span class="metric" title="Latencia">— ms</span>
+            <span class="metric" title="Tokens">— tok</span>
+          </div>
+        </div>
+        <div class="arena-panel__body" id="response-openai">
+          <span class="placeholder-text">La respuesta aparecerá aquí…</span>
+        </div>
+        <div class="arena-panel__actions">
+          <button class="icon-btn" title="Copiar respuesta" onclick="copyResponse('openai')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copiar
+          </button>
+          <button class="icon-btn vote-btn" title="Votar mejor respuesta" data-model="openai" onclick="vote('openai')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            Votar
+          </button>
+        </div>
+      </div>
+
+      <!-- Gemini -->
+      <div class="arena-panel" id="panel-gemini">
+        <div class="arena-panel__header">
+          <div class="arena-panel__meta">
+            <span class="model-badge model-badge--gemini">Google</span>
+            <span class="arena-panel__model">Gemini 1.5 Flash</span>
+          </div>
+          <div class="arena-panel__metrics" id="metrics-gemini">
+            <span class="metric" title="Latencia">— ms</span>
+            <span class="metric" title="Tokens">— tok</span>
+          </div>
+        </div>
+        <div class="arena-panel__body" id="response-gemini">
+          <span class="placeholder-text">La respuesta aparecerá aquí…</span>
+        </div>
+        <div class="arena-panel__actions">
+          <button class="icon-btn" title="Copiar respuesta" onclick="copyResponse('gemini')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copiar
+          </button>
+          <button class="icon-btn vote-btn" title="Votar mejor respuesta" data-model="gemini" onclick="vote('gemini')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            Votar
+          </button>
+        </div>
+      </div>
+
+      <!-- Groq / Llama -->
+      <div class="arena-panel" id="panel-groq">
+        <div class="arena-panel__header">
+          <div class="arena-panel__meta">
+            <span class="model-badge model-badge--groq">Groq</span>
+            <span class="arena-panel__model">Llama 3 · 70B</span>
+          </div>
+          <div class="arena-panel__metrics" id="metrics-groq">
+            <span class="metric" title="Latencia">— ms</span>
+            <span class="metric" title="Tokens">— tok</span>
+          </div>
+        </div>
+        <div class="arena-panel__body" id="response-groq">
+          <span class="placeholder-text">La respuesta aparecerá aquí…</span>
+        </div>
+        <div class="arena-panel__actions">
+          <button class="icon-btn" title="Copiar respuesta" onclick="copyResponse('groq')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copiar
+          </button>
+          <button class="icon-btn vote-btn" title="Votar mejor respuesta" data-model="groq" onclick="vote('groq')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            Votar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ───────────────── ESTADÍSTICAS ───────────────── -->
+  <section id="stats" class="section section--stats">
+    <p class="section__overline">Benchmark acumulado</p>
+    <h2 class="section__title">Estadísticas de credibilidad</h2>
+    <p class="section__desc">
+      Basado en los votos de esta sesión y métricas objetivas de cada respuesta.
+    </p>
+
+    <!-- KPI cards -->
+    <div class="kpi-grid">
+      <div class="kpi">
+        <span class="kpi__label">Consultas totales</span>
+        <span class="kpi__value" id="kpi-queries">0</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi__label">Votos emitidos</span>
+        <span class="kpi__value" id="kpi-votes">0</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi__label">Modelo líder</span>
+        <span class="kpi__value" id="kpi-leader">—</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi__label">Latencia mínima</span>
+        <span class="kpi__value" id="kpi-latency">—</span>
+      </div>
+    </div>
+
+    <!-- Detailed stats table -->
+    <div class="stats-table-wrap">
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th>Votos</th>
+            <th>Tasa de voto</th>
+            <th>Latencia prom.</th>
+            <th>Tokens prom.</th>
+            <th>Credibilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="row-openai">
+            <td>
+              <span class="model-badge model-badge--openai">OpenAI</span>
+              GPT-4o mini
+            </td>
+            <td id="votes-openai">0</td>
+            <td id="rate-openai">0%</td>
+            <td id="lat-openai">—</td>
+            <td id="tok-openai">—</td>
+            <td>
+              <div class="bar-wrap">
+                <div class="bar bar--openai" id="bar-openai" style="width:0%"></div>
+              </div>
+            </td>
+          </tr>
+          <tr id="row-gemini">
+            <td>
+              <span class="model-badge model-badge--gemini">Google</span>
+              Gemini 1.5 Flash
+            </td>
+            <td id="votes-gemini">0</td>
+            <td id="rate-gemini">0%</td>
+            <td id="lat-gemini">—</td>
+            <td id="tok-gemini">—</td>
+            <td>
+              <div class="bar-wrap">
+                <div class="bar bar--gemini" id="bar-gemini" style="width:0%"></div>
+              </div>
+            </td>
+          </tr>
+          <tr id="row-groq">
+            <td>
+              <span class="model-badge model-badge--groq">Groq</span>
+              Llama 3 · 70B
+            </td>
+            <td id="votes-groq">0</td>
+            <td id="rate-groq">0%</td>
+            <td id="lat-groq">—</td>
+            <td id="tok-groq">—</td>
+            <td>
+              <div class="bar-wrap">
+                <div class="bar bar--groq" id="bar-groq" style="width:0%"></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Chart placeholder -->
+    <div class="chart-area">
+      <p class="chart-area__label">Distribución de votos por consulta</p>
+      <canvas id="voteChart" width="800" height="200"></canvas>
+      <p class="chart-area__empty" id="chart-empty">
+        Envía tu primer prompt para ver el historial aquí.
+      </p>
+    </div>
+  </section>
+
+  <!-- ───────────────── ABOUT ───────────────── -->
+  <section id="about" class="section section--narrow section--about">
+    <p class="section__overline">¿Por qué TriIA?</p>
+    <h2 class="section__title">Credibilidad medida,<br />no asumida.</h2>
+    <div class="about-cols">
+      <div class="about-col">
+        <h4>Transparencia</h4>
+        <p>No hay caja negra. Ves exactamente la respuesta cruda de cada modelo, sin edición ni curaduría.</p>
+      </div>
+      <div class="about-col">
+        <h4>Sin costo</h4>
+        <p>Los tres modelos expuestos tienen capa gratuita vigente. Solo necesitas tus propias claves de API.</p>
+      </div>
+      <div class="about-col">
+        <h4>Métrica acumulada</h4>
+        <p>Cada voto construye un historial de sesión. Exporta los datos y llévate el benchmark.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── FOOTER ───────────────── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="#" class="nav__logo">Tri<span>IA</span></a>
+      <p class="footer__copy">© 2026 TriIA — Proyecto educativo vmDev/p>
+      <div class="footer__links">
+        <a href="#arena">Arena</a>
+        <a href="#stats">Estadísticas</a>
+        <a href="#models">Modelos</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
